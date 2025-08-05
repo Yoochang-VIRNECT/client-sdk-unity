@@ -31,7 +31,7 @@ namespace LiveKit
         /// </remarks>
         public abstract event Action<float[], int, int> AudioRead;
 
-#if UNITY_IOS
+#if (UNITY_IOS || (UNITY_ANDROID && UNITY_6000_0_OR_NEWER)) && !UNITY_EDITOR
         // iOS microphone sample rate is 24k
         public static uint DefaultMicrophoneSampleRate = 24000;
 
