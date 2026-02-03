@@ -1,6 +1,6 @@
 {
   "name": "com.virnect.livekit-sdk",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "displayName": "LiveKit SDK for VIRNECT",
   "description": "LiveKit",
   "unity": "2021.3",

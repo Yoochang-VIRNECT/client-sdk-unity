@@ -587,6 +587,10 @@ namespace LiveKit
 
                 _room.OnConnect(e);
             }
+            else
+            {
+                Debug.LogError($"Failed to connect to room: {e.Error}");
+            }
 
             IsError = !success;
             IsDone = true;
