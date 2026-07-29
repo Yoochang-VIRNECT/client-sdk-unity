@@ -32,6 +32,9 @@ namespace LiveKit
 
         protected Texture2D _previewTexture;
         protected NativeArray<byte> _captureBuffer;
+        // _captureBuffer 할당 시점의 해상도. 0이면 기존 동작(실시간 크기)으로 폴백한다.
+        protected int _bufferWidth;
+        protected int _bufferHeight;
         protected VideoStreamSource _sourceType;
         protected VideoBufferType _bufferType;
         protected VideoSourceInfo _info;
@@ -163,9 +166,12 @@ namespace LiveKit
                 }
 
                 buffer.Type = _bufferType;
-                buffer.Stride = (uint)GetWidth() * (uint)GetStrideForBuffer(_bufferType);
-                buffer.Width = (uint)GetWidth();
-                buffer.Height = (uint)GetHeight();
+                // 리사이즈로 GetWidth()/GetHeight()가 바뀌어도 _captureBuffer 실제 크기와 어긋나지 않게 한다.
+                var frameWidth = (uint)(_bufferWidth > 0 ? _bufferWidth : GetWidth());
+                var frameHeight = (uint)(_bufferHeight > 0 ? _bufferHeight : GetHeight());
+                buffer.Stride = frameWidth * (uint)GetStrideForBuffer(_bufferType);
+                buffer.Width = frameWidth;
+                buffer.Height = frameHeight;
 
                 // Send the frame to WebRTC
                 using var request = FFIBridge.Instance.NewRequest<CaptureVideoFrameRequest>();

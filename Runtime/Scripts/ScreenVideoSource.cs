@@ -70,8 +70,14 @@ namespace LiveKit
                     _textureFormat = GraphicsFormatUtility.GetTextureFormat(compatibleFormat);
                     _bufferType = GetVideoBufferType(_textureFormat);
                     _renderTexture = new RenderTexture(GetWidth(), GetHeight(), 0, compatibleFormat);
+                    // 해제하지 않으면 리사이즈마다 이전 버퍼가 누수된다.
+                    if (_captureBuffer.IsCreated)
+                        _captureBuffer.Dispose();
                     _captureBuffer = new NativeArray<byte>(GetWidth() * GetHeight() * GetStrideForBuffer(_bufferType), Allocator.Persistent);
                     _previewTexture = new Texture2D(GetWidth(), GetHeight(), _textureFormat, false);
+                    // SendFrame이 이 버퍼와 동일한 크기로 전송하도록 기록.
+                    _bufferWidth = GetWidth();
+                    _bufferHeight = GetHeight();
                     textureChanged = true;
                 }
                 ScreenCapture.CaptureScreenshotIntoRenderTexture(_renderTexture);
