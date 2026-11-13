@@ -1,0 +1,22 @@
+{
+  "upstream_unity": "v2.1.1",
+  "ffi_version": "0.13.2",
+  "rust_repository": "Yoochang-VIRNECT/rust-sdks",
+  "rust_commit": "07b324654e51cf9f910368e35f1b50f81f652ec6",
+  "actions_run": 43351681180,
+  "sha256": {
+    "Runtime/Plugins/ffi-windows-x86_64/livekit_ffi.dll": "c927555d65f53b612b7c8f960cdbbbe42b5257d68d46ddf9971b44e412aadf22",
+    "Runtime/Plugins/ffi-ios-arm64/liblivekit_ffi.a": "86750c583eba5d42b7291795cb619ff79c00b85b44c67c58523f604c9100b63c",
+    "Runtime/Plugins/ffi-macos-x86_64/liblivekit_ffi.dylib": "c7b6d6073de6d381c33f8261deba8f4ec33a3e30e4c71ca2dc40018f39caea9c",
+    "Runtime/Plugins/ffi-android-arm64/liblivekit_ffi.so": "cd105167ffb191ad940c312ecfe9c6ee41c28e80bfdbc095d4e19e41da6eafb2",
+    "Runtime/Plugins/ffi-android-arm64/libwebrtc.jar": "7f551a7a1e1b3119d1ffdd01831fd43299d64821bb570b38f5e85df906c21bab",
+    "Runtime/Plugins/ffi-linux-x86_64/liblivekit_ffi.so": "8b210c6de1c85dfa9c228d1caebf3b1506ab5ae1d22b09cf752309e229ad4aa7",
+    "Runtime/Plugins/ffi-ios-sim-arm64/liblivekit_ffi.a": "f946c48325d57a50a20788a72fedfc7319ed905d032700c9cc53e73bcaa3d6c1",
+    "Runtime/Plugins/ffi-android-x86_64/liblivekit_ffi.so": "236646b240bb5c8e6f467e0ccdbbcf34d19f659f258ef5459913f552d5a6f9eb",
+    "Runtime/Plugins/ffi-android-x86_64/libwebrtc.jar": "7f551a7a1e1b3119d1ffdd01831fd43299d64821bb570b38f5e85df906c21bab",
+    "Runtime/Plugins/ffi-android-armv7/liblivekit_ffi.so": "5ff4d42009a86646c56c1b06cacc8004a52d132c9e62b895a7bff3a7613b47e2",
+    "Runtime/Plugins/ffi-android-armv7/libwebrtc.jar": "7f551a7a1e1b3119d1ffdd01831fd43299d64821bb570b38f5e85df906c21bab",
+    "Runtime/Plugins/ffi-macos-arm64/liblivekit_ffi.dylib": "3e7f2c88dac3917343733c07bfd2cfdfeb55ccf99bdf382df468b036ceab57f7",
+    "Runtime/Plugins/ffi-windows-arm64/livekit_ffi.dll": "76ae459ce12b931848cde88f3093d1515eae84fe3af749478ac9b844c41d3ed0"
+  }
+}

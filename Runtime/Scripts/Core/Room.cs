@@ -90,6 +90,9 @@ namespace LiveKit
         public bool Dynacast = true;
         public bool AdaptiveStream = true;
         public uint JoinRetries = 3;
+        // Keep the legacy /rtc path for servers/gateways without /rtc/v1 support.
+        // Explicitly serialize false: an omitted field inherits Rust's true default.
+        public bool SinglePeerConnection = false;
         public RTCConfiguration RtcConfig = null;
         public E2EEOptions E2EE = null;
 
@@ -101,6 +104,7 @@ namespace LiveKit
             proto.Dynacast = Dynacast;
             proto.AdaptiveStream = AdaptiveStream;
             proto.JoinRetries = JoinRetries;
+            proto.SinglePeerConnection = SinglePeerConnection;
             proto.RtcConfig = RtcConfig?.ToProto();
 #pragma warning disable CS0612 // Type or member is obsolete
             proto.E2Ee = E2EE?.ToProto();

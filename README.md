@@ -787,3 +787,49 @@ To enable verbose logging, define the `LK_VERBOSE` symbol:
 </table>
 
 <!--END_REPO_NAV-->
+## VIRNECT FFI build
+
+This development package is based on Unity SDK `v2.1.1` and uses Rust FFI
+`0.13.2` from `Yoochang-VIRNECT/rust-sdks` commit `07b32465`.
+The native libraries and Android JARs come from Actions run `43351681180`.
+`Scripts~/virnect-ffi-build.json` records their SHA-256 hashes.
+
+The custom FFI bypasses signalling HTTPS/WSS certificate verification by default.
+Set `LIVEKIT_SKIP_CERT_VERIFY=false` before starting Unity to restore verification.
+The upstream `Scripts~/download_libs.py` reads `version.ini` and downloads official
+binaries; do not use it to refresh this custom build, as that would remove the
+certificate compatibility change. Use the recorded Actions artifacts instead.
+
+To exercise the custom TLS policy, put a self-signed WSS proxy in front of a
+local LiveKit dev server and set `LK_TEST_SELF_SIGNED_URL` to its `wss://` URL.
+Run `LiveKit.PlayModeTests.VirnectTlsTests` in two **separate Unity processes**,
+with `LIVEKIT_SKIP_CERT_VERIFY=true` and `LIVEKIT_SKIP_CERT_VERIFY=false`.
+The first must connect; the second must reject the certificate. Without the
+self-signed endpoint variable the test is skipped. The dev server credentials
+can be overridden with `LK_TEST_API_KEY` and `LK_TEST_API_SECRET`.
+
+`RoomOptions.SinglePeerConnection` defaults to `false` and is explicitly sent to
+Rust, preserving the legacy `/rtc` signalling path for existing VIRNECT gateways.
+Set it to `true` only for deployments supporting `/rtc/v1`. An absent protobuf
+field otherwise inherits Rust's `true` default; a gateway accepting the WebSocket
+upgrade and then closing `/rtc/v1` does not trigger Rust's 404-only fallback.
+
+All native libraries and Android JARs use the same Actions build recorded above.
+Windows and macOS binaries force signalling HTTPS to HTTP/1.1 and advertise only
+`http/1.1` for WSS ALPN, including CONNECT tunnels. Android/Quest, iOS and Linux
+retain their previous negotiation policy. The policy follows the native build
+target: ViewMobile running in the macOS Editor uses the desktop policy.
+Restart the Unity Editor after replacing native libraries to load this build.
+
+### Installing the VIRNECT test package
+
+Use the VIRNECT scoped registry `http://192.168.0.210:4873` (scope
+`com.virnect`) and set `com.virnect.livekit-sdk` to `2.1.1-virnect.1` in the
+Unity project's `Packages/manifest.json`. Replace any local `file:` dependency.
+This prerelease is published under `next`; `latest` remains the stable package.
+Restart the Editor after changing the native package. Desktop HTTP/1.1 applies
+in Windows/macOS Editors even when the project's build target is Android.
+
+This build has not yet been validated end to end on all View devices. The legacy
+VIRNECT 1.2.9 screen-resize buffer-dimension patch is not included; PC screen
+sharing during window resizing still requires a separate regression check/fix.

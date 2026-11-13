@@ -5,7 +5,7 @@ using UnityEngine;
 [InitializeOnLoad]
 public static class PackageVersionEmbedder
 {
-    const string PackageName = "io.livekit.livekit-sdk";
+    const string PackageName = "com.virnect.livekit-sdk";
     const string ResourcePath = "Assets/Resources";
     const string AssetName = "LiveKitSdkVersionInfo";
 

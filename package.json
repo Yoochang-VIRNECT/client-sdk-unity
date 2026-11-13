@@ -1,7 +1,7 @@
 {
-  "name": "io.livekit.livekit-sdk",
-  "version": "2.1.1",
-  "displayName": "LiveKit SDK",
+  "name": "com.virnect.livekit-sdk",
+  "version": "2.1.1-virnect.1",
+  "displayName": "LiveKit SDK for VIRNECT",
   "description": "LiveKit",
   "unity": "2022.3",
   "author": {
@@ -35,5 +35,27 @@
   "type": "library",
   "dependencies": {
     "com.unity.nuget.newtonsoft-json": "3.2.1"
-  }
+  },
+  "publishConfig": {
+    "registry": "http://192.168.0.210:4873",
+    "tag": "next"
+  },
+  "files": [
+    "Runtime/",
+    "Runtime.meta",
+    "Editor/",
+    "Editor.meta",
+    "Resources/",
+    "Resources.meta",
+    "Tests/",
+    "Tests.meta",
+    "Samples~/",
+    "Documentation~/",
+    "Scripts~/virnect-ffi-build.json",
+    "README.md.meta",
+    "LICENSE.md",
+    "LICENSE.md.meta",
+    "NOTICE",
+    "NOTICE.meta"
+  ]
 }
